@@ -44,6 +44,7 @@
                 android:id="@+id/frag_tv_wind"
                 style="@style/TodayText"
                 android:layout_below="@id/frag_tv_date"
+                android:layout_marginTop="5dp"
                 android:text="东北风3-4级"/>
             <TextView
                 android:id="@+id/frag_tv_line1"
@@ -142,7 +143,10 @@
                     android:layout_height="match_parent"
                     android:background="#333333"/>
                 <TextView
-                    style="@style/IndexText" />
+                    android:id="@+id/frag_index_tv_air"
+                    style="@style/IndexText"
+                    android:text="空调指数"
+                    android:drawableBottom="@mipmap/icon_air"/>
             </LinearLayout>
 
         </LinearLayout>

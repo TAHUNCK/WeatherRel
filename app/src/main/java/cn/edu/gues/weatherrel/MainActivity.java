@@ -51,11 +51,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainVp.setAdapter(adapter);
         //创建小圆点指示器
         initPoint();
+        //设置最后一个城市
+        mainVp.setCurrentItem(fragmentList.size()-1);
+        //设置ViewPager页面监听
+        setPagerListener();
 
     }
 
-    private void initPoint() {
+    private void setPagerListener() {
+        //设置监听事件
+        mainVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for(int i=0;i<imgList.size();i++){
+                    imgList.get(i).setImageResource(R.mipmap.point_black);
+                }
+                imgList.get(position).setImageResource(R.mipmap.point_green);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void initPoint() {
+        //创建小圆点，ViewPager页面指示器的函数
+        for(int i=0;i<fragmentList.size();i++){
+            ImageView pIv=new ImageView(this);
+            pIv.setImageResource(R.mipmap.point_black);
+            pIv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) pIv.getLayoutParams();
+            lp.setMargins(0,0,20,0);
+            imgList.add(pIv);
+            pointLayout.addView(pIv);
+        }
+        imgList.get(imgList.size()-1).setImageResource(R.mipmap.point_green);
     }
 
     private void initPager() {
@@ -67,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cwFragment.setArguments(bundle);
             fragmentList.add(cwFragment);
         }
+        mainVp.setOffscreenPageLimit(fragmentList.size());
     }
 
     @Override

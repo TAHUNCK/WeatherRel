@@ -1,17 +1,15 @@
 package cn.edu.gues.weatherrel;
 
 import android.app.AlertDialog;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -29,7 +27,7 @@ import cn.edu.gues.weatherrel.bean.WeatherBean;
  */
 public class CityWeatherFragment extends BaseFragment implements View.OnClickListener{
 
-    TextView tempTv,cityTv,conditionTv,windTv,tempRangeTv,dateTv,clothIndexTv,carIndexTv,coldIndexTv,sportIndexTv,raysIndexTv;
+    TextView tempTv,cityTv,conditionTv,windTv,tempRangeTv,dateTv,clothIndexTv,carIndexTv,coldIndexTv,sportIndexTv,raysIndexTv,airIndexTv;
     ImageView dayIv;
     LinearLayout futureLayout;
     String url="https://jisutqybmf.market.alicloudapi.com/weather/query?city=";
@@ -65,6 +63,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
 
     private void parseShowData(String result) {
         //使用Gson解析数据
+        //String s=result;
         WeatherBean weatherBean=new Gson().fromJson(result,WeatherBean.class);
         WeatherBean.ResultBean resultBean=weatherBean.getResult();
         //获取指数信息集合列表
@@ -122,6 +121,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         coldIndexTv=view.findViewById(R.id.frag_index_tv_cold);
         sportIndexTv=view.findViewById(R.id.frag_index_tv_sport);
         raysIndexTv=view.findViewById(R.id.frag_index_tv_rays);
+        airIndexTv=view.findViewById(R.id.frag_index_tv_air);
         dayIv=view.findViewById(R.id.frag_iv_today);
         futureLayout=view.findViewById(R.id.frag_center_layout);
         //监听点击事件设置
@@ -130,7 +130,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         coldIndexTv.setOnClickListener(this);
         sportIndexTv.setOnClickListener(this);
         raysIndexTv.setOnClickListener(this);
-
+        airIndexTv.setOnClickListener(this);
     }
 
     @Override
@@ -174,6 +174,12 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
                 builder.setMessage(msg);
                 builder.setPositiveButton("确定",null);
                 break;
+            case R.id.frag_index_tv_air:
+                builder.setTitle("空调指数");
+                indexBean=indexList.get(0);
+                msg=indexBean.getIvalue()+"\n"+indexBean.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
         }
         builder.create().show();
     }

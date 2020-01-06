@@ -16,7 +16,6 @@ public class CityFragmentPagerAdapter extends FragmentStatePagerAdapter {
         this.fragmentList=fragmentList;
     }
 
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
