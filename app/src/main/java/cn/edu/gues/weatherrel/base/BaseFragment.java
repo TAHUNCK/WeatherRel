@@ -1,4 +1,4 @@
-package cn.edu.gues.weatherrel;
+package cn.edu.gues.weatherrel.base;
 
 import androidx.fragment.app.Fragment;
 

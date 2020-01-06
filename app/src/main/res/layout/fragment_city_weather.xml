@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:clickable="true"
             android:layout_margin="10dp"
             android:background="@drawable/frag_center_bg">
 
@@ -95,6 +95,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_dress"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="穿衣指数"
                     android:drawableBottom="@mipmap/icon_cloth"/>
                 <ImageView
@@ -104,6 +106,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_washcar"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="洗车指数"
                     android:drawableBottom="@mipmap/icon_car"/>
                 <ImageView
@@ -113,6 +117,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_cold"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="感冒指数"
                     android:drawableBottom="@mipmap/icon_cold"/>
             </LinearLayout>
@@ -127,6 +133,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_sport"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="运动指数"
                     android:drawableBottom="@mipmap/icon_sport"/>
                 <ImageView
@@ -136,6 +144,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_rays"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="紫外线指数"
                     android:drawableBottom="@mipmap/icon_rays"/>
                 <ImageView
@@ -145,6 +155,8 @@
                 <TextView
                     android:id="@+id/frag_index_tv_air"
                     style="@style/IndexText"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:text="空调指数"
                     android:drawableBottom="@mipmap/icon_air"/>
             </LinearLayout>

@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     // https://mvnrepository.com/artifact/com.squareup.picasso/picasso
     implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.5.2'
-
+    implementation 'androidx.cardview:cardview:1.0.0'
 
 
 }

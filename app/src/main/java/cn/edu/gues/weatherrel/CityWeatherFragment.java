@@ -2,6 +2,7 @@ package cn.edu.gues.weatherrel;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,9 @@ import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.List;
 
+import cn.edu.gues.weatherrel.base.BaseFragment;
 import cn.edu.gues.weatherrel.bean.WeatherBean;
+import cn.edu.gues.weatherrel.db.DBManager;
 
 
 /**
@@ -30,6 +33,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     TextView tempTv,cityTv,conditionTv,windTv,tempRangeTv,dateTv,clothIndexTv,carIndexTv,coldIndexTv,sportIndexTv,raysIndexTv,airIndexTv;
     ImageView dayIv;
     LinearLayout futureLayout;
+    String city="毕节";
     String url="https://jisutqybmf.market.alicloudapi.com/weather/query?city=";
     private List<WeatherBean.ResultBean.IndexBean> indexList;
 
@@ -39,7 +43,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         initView(view);
         //通过activity传值获取到当前fragment加载的是哪个地方的天气情况
         Bundle bundle=getArguments();
-        String city=bundle.getString("city");
+        city=bundle.getString("city");
         try {
             url=url+URLEncoder.encode(city,"UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -54,11 +58,22 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     public void onSuccess(String result) {
         //解析并展示数据
         parseShowData(result);
+        //更新数据
+        int i= DBManager.updateInfoByCity(city,result);
+        if(i<=0){
+            //更新失败，增加记录
+            DBManager.addCityInfo(city,result);
+        }
     }
 
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
-        super.onError(ex, isOnCallback);
+        //数据库中查找上一次信息显示在Fragment中
+        String s=DBManager.queryInfoByCity(city);
+        if(!TextUtils.isEmpty(s)){
+            parseShowData(s);
+        }
+
     }
 
     private void parseShowData(String result) {
@@ -93,7 +108,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
             idateTv.setText(dailyBean.getDate());
             iconTv.setText(dailyBean.getDay().getWeather());
             itemprangeTv.setText(dailyBean.getNight().getTemplow()+"℃~"+dailyBean.getDay().getTemphigh()+"℃");
-            Picasso.with(getActivity()).load(getResource("x"+resultBean.getImg())).into(iIv);
+            Picasso.with(getActivity()).load(getResource("x"+resultBean.getDaily().get(i).getDay().getImg())).into(iIv);
         }
     }
 
