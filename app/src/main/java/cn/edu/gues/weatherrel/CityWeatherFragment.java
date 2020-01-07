@@ -33,7 +33,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     TextView tempTv,cityTv,conditionTv,windTv,tempRangeTv,dateTv,clothIndexTv,carIndexTv,coldIndexTv,sportIndexTv,raysIndexTv,airIndexTv;
     ImageView dayIv;
     LinearLayout futureLayout;
-    String city="毕节";
+    String city;
     String url="https://jisutqybmf.market.alicloudapi.com/weather/query?city=";
     private List<WeatherBean.ResultBean.IndexBean> indexList;
 

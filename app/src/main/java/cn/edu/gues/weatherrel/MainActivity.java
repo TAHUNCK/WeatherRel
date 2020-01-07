@@ -2,6 +2,7 @@ package cn.edu.gues.weatherrel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(cityList.size()==0){
             cityList.add("毕节");
+        }
+        //可能搜索界面到此界面会传值，此处获取
+        Intent intent=getIntent();
+        String city=intent.getStringExtra("city");
+        if(!cityList.contains(city)&& !TextUtils.isEmpty(city)){
+            cityList.add(city);
         }
 
         //初始化ViewPager页面的方法
