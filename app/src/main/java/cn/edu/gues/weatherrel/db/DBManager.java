@@ -79,4 +79,10 @@ public class DBManager {
         return database.delete("info","city=?",new String[]{city});
     }
 
+    //删除表中所有信息
+    public static void deleteAllInfo(){
+        String sql="delete from info";
+        database.execSQL(sql);
+    }
+
 }

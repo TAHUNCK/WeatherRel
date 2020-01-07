@@ -1,11 +1,13 @@
 package cn.edu.gues.weatherrel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView addCityIv;
     ImageView moreIv;
     LinearLayout pointLayout;
+    RelativeLayout outLayout;
     ViewPager mainVp;
     //ViewPager的数据源
     List<Fragment> fragmentList;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //表示ViewPager的页数指示器集合
     List<ImageView> imgList;
     private CityFragmentPagerAdapter adapter;
+    private SharedPreferences pref;
+    private int bgNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         moreIv=findViewById(R.id.main_iv_more);
         pointLayout=findViewById(R.id.main_layout_point);
         mainVp=findViewById(R.id.main_vp);
+        outLayout=findViewById(R.id.main_out_layout);
+        exchangeBg();
         //首页添加点击事件
         addCityIv.setOnClickListener(this);
         moreIv.setOnClickListener(this);
@@ -67,6 +74,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置ViewPager页面监听
         setPagerListener();
 
+    }
+
+    //换壁纸
+    public void exchangeBg(){
+        pref = getSharedPreferences("bg_pref", MODE_PRIVATE);
+        bgNum = pref.getInt("bg", 1);
+        switch (bgNum){
+            case 1:
+                outLayout.setBackgroundResource(R.mipmap.bg1);
+                break;
+            case 2:
+                outLayout.setBackgroundResource(R.mipmap.bg2);
+                break;
+            case 3:
+                outLayout.setBackgroundResource(R.mipmap.bg3);
+                break;
+            case 4:
+                outLayout.setBackgroundResource(R.mipmap.bg4);
+                break;
+            case 5:
+                outLayout.setBackgroundResource(R.mipmap.bg5);
+                break;
+            case 6:
+                outLayout.setBackgroundResource(R.mipmap.bg6);
+                break;
+        }
     }
 
     private void setPagerListener() {
@@ -127,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setClass(this, CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
-
+                intent.setClass(this,MoreActivity.class);
                 break;
         }
         startActivity(intent);

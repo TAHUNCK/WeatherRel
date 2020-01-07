@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:cardElevation="5dp"
+        app:cardBackgroundColor="#00BCD4"
         android:foreground = "?attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
         app:contentPadding="20dp">

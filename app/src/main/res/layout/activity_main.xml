@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
+    android:id="@+id/main_out_layout"
+    android:background="@mipmap/bg1"
     tools:context=".MainActivity">
 
     <RelativeLayout
