@@ -114,8 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putString("city",cityList.get(i));
             cwFragment.setArguments(bundle);
             fragmentList.add(cwFragment);
+            System.out.println(fragmentList.size());
         }
-        mainVp.setOffscreenPageLimit(fragmentList.size());
+        //mainVp.setOffscreenPageLimit(fragmentList.size());
     }
 
     @Override
@@ -131,4 +132,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         startActivity(intent);
     }
+
+    //页面重新加载时调用的函数，此处完成ViewPager的更新
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //获取数据库中还剩的城市列表
+        List<String> list=DBManager.queryAllName();
+        if(list.size()==0){
+            list.add("毕节");
+        }
+        cityList.clear();
+        cityList.addAll(list);
+        //剩余城市也要创建对应的Fragment页面
+        fragmentList.clear();
+        initPager();
+        //提示适配器更新
+        adapter.notifyDataSetChanged();
+        //页面数量改变，指示器也改变
+        imgList.clear();
+        pointLayout.removeAllViews();//移除所有元素小点点
+        //创建并添加
+        initPoint();
+        mainVp.setCurrentItem(fragmentList.size()-1);
+    }
+
 }

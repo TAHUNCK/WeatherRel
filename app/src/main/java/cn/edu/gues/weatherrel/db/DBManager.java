@@ -74,4 +74,9 @@ public class DBManager {
         return list;
     }
 
+    //根据城市名称删除城市
+    public static int deleteInfoCity(String city){
+        return database.delete("info","city=?",new String[]{city});
+    }
+
 }

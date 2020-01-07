@@ -26,4 +26,22 @@ public class CityFragmentPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return fragmentList.size();
     }
+
+    int childCount=0;//ViewPager包含的页数
+
+    //当ViewPager页数发生改变时，必须要重写两个函数
+    @Override
+    public void notifyDataSetChanged() {
+        this.childCount=getCount();
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        if(childCount>0){
+            childCount--;
+            return POSITION_NONE;
+        }
+        return super.getItemPosition(object);
+    }
 }
